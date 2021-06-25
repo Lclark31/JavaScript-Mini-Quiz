@@ -1,0 +1,46 @@
+:root {
+  --correct: green;
+  --incorrect: red;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  border: 5px solid #8d1874;
+  border-radius: 25px;
+  box-shadow: 0 0 5px 2px;
+  padding: 5em 15em;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+/* buttons */
+.btn {
+  width: 25em;
+  height: 7em;
+}
+
+.answer-btns {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px;
+}
+
+.hide {
+  display: none;
+}
