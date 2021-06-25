@@ -3,23 +3,24 @@ let startEl = document.querySelector(`.start-btn`);
 let timerEl = document.querySelector(`.timer`);
 let questionEl = document.querySelector(`.question`);
 let buttonsEl = document.querySelector(`.answer-btns`);
-let answerButtonEl = document.getElementsByClassName(`btn`);
+let answerButtonEl = document.getElementsByClassName(`btns`);
+let headerEl = document.querySelector(`#ready`);
 
 let questions = [
   {
     question: `what is 2 plus 2?`,
     options: [`1`, `2`, `3`, `4`],
-    correctAnswer: 2,
+    correctAnswer: `4`,
   },
   {
     question: `what is 2 plus 1?`,
     options: [`1`, `2`, `3`, `4`],
-    correctAnswer: 2,
+    correctAnswer: `3`,
   },
   {
-    question: `what is 1 plus 3?`,
+    question: `what is 1 plus 4?`,
     options: [`1`, `2`, `3`, `5`],
-    correctAnswer: 2,
+    correctAnswer: `5`,
   },
 ];
 
@@ -39,23 +40,44 @@ function countdown() {
 
 // question with four buttons
 
+let questionNum = 0;
+
+function endQuiz() {
+  console.log(`out of questions`);
+}
 // define startQuiz
 function startQuiz() {
   countdown();
   startEl.classList.add(`hide`);
+  headerEl.classList.add(`hide`);
   buttonsEl.classList.remove(`hide`);
+  askNextQuestion();
+}
 
-  let askQuestion = questions[0].question;
+function askNextQuestion() {
+  let askQuestion = questions[questionNum].question;
   questionEl.textContent = askQuestion;
-  let answers = questions[0].options;
-  answerButtonEl[0].textContent = answers[3];
+  let answers = questions[questionNum].options;
+  for (let i = 0; i < questions[questionNum].options.length; i++) {
+    answerButtonEl[i].textContent = answers[i];
+  }
 
-  //   for (let i = 0; i < questions.length; i++) {
-  //     let askQuestion = questions[i].question;
-  //     questionEl.textContent = askQuestion;
-  //     let answers = questions[i].options;
-  //     answerButtonEl[i].textContent = answers;
-  //   }
+  for (i = 0; i < answerButtonEl.length; i++) {
+    answerButtonEl[i].setAttribute(`id`, i);
+    answerButtonEl[i].addEventListener(`click`, checkAnswer);
+  }
+}
+
+function checkAnswer() {
+  let correct = questions[questionNum].correctAnswer;
+  let selectedButton = event.target;
+  if (selectedButton.textContent === correct) {
+    console.log(`nice`);
+  } else {
+    console.log(`wrong`);
+  }
+  questionNum++;
+  askNextQuestion();
 }
 // display correct or incorrect
 
