@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  border: 5px solid #8d1874;
+  border: 7px solid #c533a6;
   border-radius: 25px;
   box-shadow: 0 0 5px 2px;
   padding: 5em 15em;
@@ -42,6 +42,31 @@ h2 {
   gap: 20px;
 }
 
+.submit-btn {
+  width: 100%;
+  height: 2em;
+  margin: 0;
+  font-size: 20px;
+}
+
 .hide {
   display: none;
+}
+
+/* correct and incorrect */
+.correct {
+  background-color: #73ee98;
+}
+
+.wrong {
+  background-color: #e20c0c;
+}
+
+/* highscore */
+.initials {
+  width: 20em;
+  height: 3em;
+  text-align: center;
+  margin: 3em;
+  font-size: 20px;
 }
