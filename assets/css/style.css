@@ -1,6 +1,8 @@
 :root {
-  --correct: green;
-  --incorrect: red;
+  --correct: #00bb38;
+  --incorrect: #e92727;
+  --primary-color: #000000;
+  --secondary-color: #fbd500;
 }
 
 * {
@@ -16,38 +18,63 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: cursive;
+  background-image: linear-gradient(var(--secondary-color), var(--secondary-color), var(--secondary-color), var(--primary-color));
 }
 
 .container {
-  border: 7px solid #c533a6;
+  border: 7px solid var(--primary-color);
   border-radius: 25px;
   box-shadow: 0 0 5px 2px;
   padding: 5em 15em;
+  background-color: white;
 }
 
 h1,
 h2 {
   text-align: center;
+  margin-bottom: 30px;
 }
 
-a {
-  position: fixed;
-  top: 0;
-  left: 0;
-  font-size: 2em;
-  text-decoration: none;
-  color: #c533a6;
-}
-
-a:hover {
-  font-size: 2.5em;
-  font-weight: bold;
-}
 /* buttons */
+.submit-btn,
 .btns,
 .btn {
-  width: 25em;
-  height: 7em;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  font-size: 2em;
+  border: 5px solid;
+  background-color: var(--secondary-color);
+}
+
+.btns {
+  width: 10em;
+}
+
+.btns:hover,
+.submit-btn:hover,
+.btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border: 5px solid var(--primary-color);
+}
+
+.retake-btn {
+  width: 20em;
+  height: 5em;
+  position: fixed;
+  top: 0.3em;
+  right: 0.3em;
+  font-size: 1em;
+  color: white;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.retake-btn:hover {
+  background-color: whitesmoke;
+  color: black;
+  border: 5px solid var(--primary-color);
 }
 
 .answer-btns {
@@ -67,27 +94,37 @@ a:hover {
   display: none;
 }
 
-.retake-btn {
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
-}
 /* correct and incorrect */
 .correct {
-  background-color: #73ee98;
+  background-color: var(--correct);
 }
 
 .wrong {
-  background-color: #e20c0c;
+  background-color: var(--incorrect);
 }
 
 /* highscore */
 .initials {
-  width: 20em;
-  height: 3em;
+  width: 60%;
+  height: 2em;
   text-align: center;
   margin: 3em;
-  font-size: 20px;
+  font-size: 25px;
+  border: 2px solid;
+}
+
+a {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 2em;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+a:hover {
+  font-size: 2em;
+  font-weight: bold;
 }
 
 /* score page */

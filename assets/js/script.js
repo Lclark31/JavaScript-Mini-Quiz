@@ -6,17 +6,17 @@ let buttonsEl = document.querySelector(`.answer-btns`);
 let answerButtonEl = document.getElementsByClassName(`btns`);
 let headerEl = document.querySelector(`#ready`);
 let submitButtonEl = document.createElement(`button`);
-let highscorePage = document.querySelector(`.highscores`);
 let retakeButtonEl = document.querySelector(`.retake-btn`);
+let highscorePage = document.querySelector(`.highscores`);
 let timeLeft = 100;
 let questionNum = 0;
 let highscores = 0;
 
 let questions = [
   {
-    question: `what is 2 plus 2?`,
-    options: [`1`, `2`, `3`, `4`],
-    correctAnswer: `4`,
+    question: `What element does javascript go in?`,
+    options: [`<script>`, `<java>`, `<js>`, `All of the above`],
+    correctAnswer: `<script>`,
   },
   {
     question: `what is 2 plus 1?`,
@@ -31,27 +31,29 @@ let questions = [
 ];
 
 function countdown() {
-  timerEl.textContent = `You have ${timeLeft} seconds to finish`;
+  questionEl.textContent = `Let's Begin!`;
+  timerEl.textContent = `You will have ${timeLeft}s to finish`;
+  setTimeout(() => {
+    buttonsEl.classList.remove(`hide`);
+    timerEl.textContent = `${timeLeft}s`;
 
-  let timeInterval = setInterval(() => {
-    if (questions[questionNum] === undefined) {
-      clearInterval(timeInterval);
-    }
-    if (timeLeft > 0) {
-      timerEl.textContent = `${timeLeft}`;
-      timeLeft--;
-    } else if (timeLeft <= 0) {
-      clearInterval(timeInterval);
-      endQuiz();
-    }
-    console.log(timeLeft);
-  }, 1000);
-  askNextQuestion();
+    let timeInterval = setInterval(() => {
+      if (questions[questionNum] === undefined) {
+        clearInterval(timeInterval);
+      }
+      if (timeLeft > 0) {
+        timerEl.textContent = `${timeLeft}s`;
+        timeLeft--;
+      } else if (timeLeft <= 0) {
+        clearInterval(timeInterval);
+        endQuiz();
+      }
+    }, 1000);
+    askNextQuestion();
+  }, 2000);
 }
 
-// create a input function so the user's initials are the key to the localStorage
 function userSignature() {
-  // console.log(score);
   let inputEl = document.createElement(`input`);
   inputEl.classList.add(`initials`);
 
@@ -65,15 +67,16 @@ function userSignature() {
   submitButtonEl.addEventListener(`click`, function () {
     if (inputEl.value === ``) {
       alert(`You must fill out the textbox!`);
+    } else if (inputEl.value.length > 10) {
+      alert(`Initials are too long!`);
     } else {
       localStorage.setItem(inputEl.value, score);
-      console.log(inputEl.value);
+      highscorePage.click();
+      inputEl.reset();
     }
   });
   retakeButtonEl.classList.remove(`hide`);
 }
-
-// userSignature();
 
 function endQuiz() {
   timerEl.classList.add(`hide`);
@@ -105,7 +108,6 @@ function startQuiz() {
   countdown();
   startEl.classList.add(`hide`);
   headerEl.classList.add(`hide`);
-  buttonsEl.classList.remove(`hide`);
 }
 
 function askNextQuestion() {
@@ -129,28 +131,24 @@ function checkAnswer() {
     document.querySelector(`.container`).classList.add(`correct`);
     setInterval(() => {
       document.querySelector(`.container`).classList.remove(`correct`);
-    }, 350);
-    console.log(`nice`);
+    }, 500);
   } else {
-    console.log(`wrong`);
     document.querySelector(`.container`).classList.add(`wrong`);
     setInterval(() => {
       document.querySelector(`.container`).classList.remove(`wrong`);
-    }, 350);
+    }, 500);
     timeLeft -= 20;
   }
   questionNum++;
-  if (questions[questionNum] === undefined) {
-    endQuiz();
-  } else {
-    askNextQuestion();
-  }
+  setTimeout(() => {
+    if (questions[questionNum] === undefined) {
+      endQuiz();
+    } else {
+      askNextQuestion();
+    }
+  }, 600);
 }
 
-// display highscore from localStorage
-// view high scores in another html page
-
-// console.log(startEl);
 startEl.addEventListener(`click`, startQuiz);
 
 retakeButtonEl.addEventListener(`click`, function () {

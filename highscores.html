@@ -10,39 +10,52 @@
   <body>
     <a href="index.html" class="highscores">Back to the quiz!</a>
     <div class="container">
-      <h1 style="text-decoration: underline">High Scores</h1>
-      <ul class="scores"></ul>
+      <h1 style="text-decoration: underline">Highscores</h1>
+      <ul class="scores" id="scores"></ul>
     </div>
     <script>
       let containerEl = document.querySelector(`.scores`);
+      let messageEl = document.querySelector(`h1`);
+      let listEl;
+      let score;
+      let user;
 
       for (let i = 0; i < localStorage.length; i++) {
-        let user = localStorage.key(i);
-        let score = localStorage.getItem(localStorage.key(i));
-        let listEl = document.createElement(`li`);
+        user = localStorage.key(i);
+        score = localStorage.getItem(localStorage.key(i));
+        listEl = document.createElement(`li`);
+        listEl.id = i;
         containerEl.appendChild(listEl);
-        listEl.textContent = `${user}: ${score}`;
+        listEl.textContent = `${user.toLocaleUpperCase()}: ${score}`;
+        if (user === `highscore`) {
+          listEl.remove();
+          let highscoreEL = document.createElement(`h2`);
+        }
+      }
+      if (user === undefined) {
+        messageEl.textContent = `There are no highscores`;
+        messageEl.style.textDecoration = null;
       }
 
-      //   function SortLocalStorage() {
-      //     if (localStorage.length > 0) {
-      //       var localStorageArray = new Array();
-      //       for (i = 0; i < localStorage.length; i++) {
-      //         localStorageArray[i] = `${localStorage.getItem(localStorage.key(i))} pts: ${localStorage.key(i)}`;
-      //         console.log(parseInt(localStorageArray[i]));
-      //       }
-      //     }
-      //     var sortedArray = localStorageArray.sort();
-      //     console.log(parseInt(sortedArray));
-      //     for (i in sortedArray) {
-      //       console.log(sortedArray[i]);
-      //       let listEl = document.createElement(`li`);
-      //       containerEl.appendChild(listEl);
-      //       listEl.textContent = sortedArray[i];
+      // function SortLocalStorage() {
+      //   if (localStorage.length > 0) {
+      //     var localStorageArray = new Array();
+      //     for (i = 0; i < localStorage.length; i++) {
+      //       (localStorageArray[i] = localStorage.getItem(localStorage.key(i))), localStorage.key(i);
       //     }
       //   }
+      //   var sortedArray = localStorageArray.sort();
+      //   for (i in parseInt(sortedArray)) {
+      //     // console.log(parseInt(sortedArray));
+      //     // console.log(sortedArray[i]);
+      //     let listEl = document.createElement(`li`);
+      //     containerEl.appendChild(listEl);
+      //     listEl.textContent = sortedArray[i];
+      //   }
+      //   console.log(sortedArray);
+      // }
 
-      //   SortLocalStorage();
+      // SortLocalStorage();
     </script>
   </body>
 </html>
