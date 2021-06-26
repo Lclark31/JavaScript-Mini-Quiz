@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Quiz HighScores</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <a href="index.html" class="highscores">Back to the quiz!</a>
+    <div class="container">
+      <h1 style="text-decoration: underline">High Scores</h1>
+      <ul class="scores"></ul>
+    </div>
+    <script>
+      let containerEl = document.querySelector(`.scores`);
+
+      for (let i = 0; i < localStorage.length; i++) {
+        let user = localStorage.key(i);
+        let score = localStorage.getItem(localStorage.key(i));
+        let listEl = document.createElement(`li`);
+        containerEl.appendChild(listEl);
+        listEl.textContent = `${user}: ${score}`;
+      }
+
+      //   function SortLocalStorage() {
+      //     if (localStorage.length > 0) {
+      //       var localStorageArray = new Array();
+      //       for (i = 0; i < localStorage.length; i++) {
+      //         localStorageArray[i] = `${localStorage.getItem(localStorage.key(i))} pts: ${localStorage.key(i)}`;
+      //         console.log(parseInt(localStorageArray[i]));
+      //       }
+      //     }
+      //     var sortedArray = localStorageArray.sort();
+      //     console.log(parseInt(sortedArray));
+      //     for (i in sortedArray) {
+      //       console.log(sortedArray[i]);
+      //       let listEl = document.createElement(`li`);
+      //       containerEl.appendChild(listEl);
+      //       listEl.textContent = sortedArray[i];
+      //     }
+      //   }
+
+      //   SortLocalStorage();
+    </script>
+  </body>
+</html>

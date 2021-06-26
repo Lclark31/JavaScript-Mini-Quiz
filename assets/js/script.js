@@ -6,6 +6,8 @@ let buttonsEl = document.querySelector(`.answer-btns`);
 let answerButtonEl = document.getElementsByClassName(`btns`);
 let headerEl = document.querySelector(`#ready`);
 let submitButtonEl = document.createElement(`button`);
+let highscorePage = document.querySelector(`.highscores`);
+let retakeButtonEl = document.querySelector(`.retake-btn`);
 let timeLeft = 100;
 let questionNum = 0;
 let highscores = 0;
@@ -32,12 +34,17 @@ function countdown() {
   timerEl.textContent = `You have ${timeLeft} seconds to finish`;
 
   let timeInterval = setInterval(() => {
-    if (timeLeft > -1) {
+    if (questions[questionNum] === undefined) {
+      clearInterval(timeInterval);
+    }
+    if (timeLeft > 0) {
       timerEl.textContent = `${timeLeft}`;
       timeLeft--;
     } else if (timeLeft <= 0) {
       clearInterval(timeInterval);
+      endQuiz();
     }
+    console.log(timeLeft);
   }, 1000);
   askNextQuestion();
 }
@@ -63,6 +70,7 @@ function userSignature() {
       console.log(inputEl.value);
     }
   });
+  retakeButtonEl.classList.remove(`hide`);
 }
 
 // userSignature();
@@ -72,16 +80,17 @@ function endQuiz() {
   buttonsEl.classList.add(`hide`);
 
   score = timeLeft;
-  timeLeft = 0;
   let highscore = localStorage.getItem(`highscore`);
   if (highscore === null) {
     localStorage.setItem(`highscore`, score);
-    questionEl.textContent = `New score of ${score}pts!`;
+    questionEl.textContent = `New score of ${score} pts!`;
+  } else if (score <= 0) {
+    questionEl.textContent = `You got ${0} points`;
   } else if (score > parseInt(highscore)) {
     localStorage.setItem(`highscore`, score);
-    questionEl.textContent = `New Highscore! ${score}pts`;
+    questionEl.textContent = `New Highscore! ${score} pts`;
   } else {
-    questionEl.textContent = `You got a score of ${score}pts!`;
+    questionEl.textContent = `You got a score of ${score} pts!`;
   }
 
   let acknowledgeButtonEl = document.createElement('button');
@@ -90,14 +99,6 @@ function endQuiz() {
   acknowledgeButtonEl.classList.add(`submit-btn`);
   acknowledgeButtonEl.textContent = `Submit Score!`;
   acknowledgeButtonEl.addEventListener(`click`, userSignature);
-}
-
-function saveScore() {
-  let highscore = localStorage.getItem(`highscores`);
-  if (score > parseInt(highscore)) {
-    localStorage.setItem(`highscore`, score);
-    highscore = localStorage.getItem(`highscore`);
-  }
 }
 
 function startQuiz() {
@@ -147,8 +148,11 @@ function checkAnswer() {
 }
 
 // display highscore from localStorage
-
 // view high scores in another html page
 
 // console.log(startEl);
 startEl.addEventListener(`click`, startQuiz);
+
+retakeButtonEl.addEventListener(`click`, function () {
+  location.reload();
+});

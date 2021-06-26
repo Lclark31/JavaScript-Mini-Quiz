@@ -15,6 +15,7 @@ body {
   align-items: center;
   height: 100vh;
   width: 100vw;
+  font-family: cursive;
 }
 
 .container {
@@ -29,6 +30,19 @@ h2 {
   text-align: center;
 }
 
+a {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 2em;
+  text-decoration: none;
+  color: #c533a6;
+}
+
+a:hover {
+  font-size: 2.5em;
+  font-weight: bold;
+}
 /* buttons */
 .btns,
 .btn {
@@ -53,6 +67,11 @@ h2 {
   display: none;
 }
 
+.retake-btn {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+}
 /* correct and incorrect */
 .correct {
   background-color: #73ee98;
@@ -69,4 +88,10 @@ h2 {
   text-align: center;
   margin: 3em;
   font-size: 20px;
+}
+
+/* score page */
+.scores {
+  font-size: 2em;
+  list-style: none;
 }
