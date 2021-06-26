@@ -1,4 +1,3 @@
-// Start screen with button
 let startEl = document.querySelector(`.start-btn`);
 let timerEl = document.querySelector(`.timer`);
 let questionEl = document.querySelector(`.question`);
@@ -9,6 +8,7 @@ let submitButtonEl = document.createElement(`button`);
 let retakeButtonEl = document.querySelector(`.retake-btn`);
 let highscorePage = document.querySelector(`.highscores`);
 let timeLeft = 100;
+let penalty = 10;
 let questionNum = 0;
 let highscores = 0;
 
@@ -19,21 +19,38 @@ let questions = [
     correctAnswer: `<script>`,
   },
   {
-    question: `what is 2 plus 1?`,
-    options: [`1`, `2`, `3`, `4`],
-    correctAnswer: `3`,
+    question: `If statements are enclosed with a ____?`,
+    options: [`Bracket`, `Parenthesis`, `Curly brace`, `Semicolon`],
+    correctAnswer: `Curly brace`,
   },
   {
-    question: `what is 1 plus 4?`,
-    options: [`1`, `2`, `3`, `5`],
-    correctAnswer: `5`,
+    question: `If variables share a name, which takes precednece?`,
+    options: [`Global variables`, `Local variables`, `Neither`, `Both`],
+    correctAnswer: `Local variables`,
+  },
+  {
+    question: `Which will create a new object?`,
+    options: [`var obj = Object();`, `var obj = new obj();`, `var obj = new Object();`, `All of the above`],
+    correctAnswer: `var obj = new Object();`,
+  },
+  {
+    question: `Which will join all array elements into a string?`,
+    options: [`concat()`, `join()`, `pop()`, `map()`],
+    correctAnswer: `join()`,
+  },
+  {
+    question: `How would you put an item in localStorage?`,
+    options: [`localStorage.getItem()`, `localStorage.append()`, `localStorage.setItem()`, `localStorage.set()`],
+    correctAnswer: `localStorage.setItem()`,
   },
 ];
 
 function countdown() {
   questionEl.textContent = `Let's Begin!`;
+  headerEl.textContent = `(You will lose ${penalty}pts for every wrong answer)`;
   timerEl.textContent = `You will have ${timeLeft}s to finish`;
   setTimeout(() => {
+    headerEl.classList.add(`hide`);
     buttonsEl.classList.remove(`hide`);
     timerEl.textContent = `${timeLeft}s`;
 
@@ -50,7 +67,7 @@ function countdown() {
       }
     }, 1000);
     askNextQuestion();
-  }, 2000);
+  }, 3500);
 }
 
 function userSignature() {
@@ -72,7 +89,7 @@ function userSignature() {
     } else {
       localStorage.setItem(inputEl.value, score);
       highscorePage.click();
-      inputEl.reset();
+      inputEl.value.reset();
     }
   });
   retakeButtonEl.classList.remove(`hide`);
@@ -107,7 +124,6 @@ function endQuiz() {
 function startQuiz() {
   countdown();
   startEl.classList.add(`hide`);
-  headerEl.classList.add(`hide`);
 }
 
 function askNextQuestion() {
@@ -137,7 +153,7 @@ function checkAnswer() {
     setInterval(() => {
       document.querySelector(`.container`).classList.remove(`wrong`);
     }, 500);
-    timeLeft -= 20;
+    timeLeft -= penalty;
   }
   questionNum++;
   setTimeout(() => {
