@@ -89,7 +89,7 @@ function userSignature() {
       alert(`Initials are too long!`);
     } else {
       localStorage.setItem(inputEl.value, score);
-      // highscorePageEl.click();
+      highscorePageEl.click();
       inputEl.value(``);
     }
   });
