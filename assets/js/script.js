@@ -20,7 +20,7 @@ let questions = [
     correctAnswer: `<script>`,
   },
   {
-    question: `If statements are enclosed with a ____?`,
+    question: `"if" statements are enclosed with a ____?`,
     options: [`Bracket`, `Parenthesis`, `Curly brace`, `Semicolon`],
     correctAnswer: `Curly brace`,
   },
