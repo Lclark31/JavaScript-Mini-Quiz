@@ -1,8 +1,10 @@
 :root {
   --correct: #00bb38;
   --incorrect: #e92727;
-  --primary-color: #000000;
-  --secondary-color: #fbd500;
+  --primary-color: #e4dada;
+  --secondary-color: #000000;
+  /* --primary-color: #000000; */
+  /* --secondary-color: #fbd500; */
 }
 
 * {
@@ -43,8 +45,9 @@ h2 {
   height: 100%;
   border-radius: 25px;
   font-size: 2em;
-  border: 5px solid;
+  border: 5px solid none;
   background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .btns {
@@ -57,8 +60,8 @@ h2 {
 .submit-btn:hover,
 .btn:hover {
   background-color: var(--primary-color);
-  color: white;
-  border: 5px solid var(--primary-color);
+  color: var(--secondary-color);
+  border: 5px solid var(--secondary-color);
 }
 
 .retake-btn {
@@ -68,13 +71,13 @@ h2 {
   top: 0.3em;
   right: 0.3em;
   font-size: 1em;
-  color: white;
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: 3px solid white;
 }
 
 .retake-btn:hover {
-  background-color: whitesmoke;
+  background-color: var(--primary-color);
   color: black;
   border: 5px solid var(--primary-color);
 }

@@ -6,7 +6,8 @@ let answerButtonEl = document.getElementsByClassName(`btns`);
 let headerEl = document.querySelector(`#ready`);
 let submitButtonEl = document.createElement(`button`);
 let retakeButtonEl = document.querySelector(`.retake-btn`);
-let highscorePage = document.querySelector(`.highscores`);
+let highscorePageEl = document.querySelector(`.highscores`);
+let inputEl = document.createElement(`input`);
 let timeLeft = 100;
 let penalty = 10;
 let questionNum = 0;
@@ -71,7 +72,7 @@ function countdown() {
 }
 
 function userSignature() {
-  let inputEl = document.createElement(`input`);
+  highscorePageEl.classList.remove(`hide`);
   inputEl.classList.add(`initials`);
 
   questionEl.textContent = `Enter your initials:`;
@@ -88,8 +89,8 @@ function userSignature() {
       alert(`Initials are too long!`);
     } else {
       localStorage.setItem(inputEl.value, score);
-      highscorePage.click();
-      inputEl.value.reset();
+      // highscorePageEl.click();
+      inputEl.value(``);
     }
   });
   retakeButtonEl.classList.remove(`hide`);
@@ -124,6 +125,7 @@ function endQuiz() {
 function startQuiz() {
   countdown();
   startEl.classList.add(`hide`);
+  highscorePageEl.classList.add(`hide`);
 }
 
 function askNextQuestion() {
@@ -144,15 +146,15 @@ function checkAnswer() {
   let correct = questions[questionNum].correctAnswer;
   let selectedButton = event.target;
   if (selectedButton.textContent === correct) {
-    document.querySelector(`.container`).classList.add(`correct`);
-    setInterval(() => {
+    setTimeout(() => {
       document.querySelector(`.container`).classList.remove(`correct`);
     }, 500);
+    document.querySelector(`.container`).classList.add(`correct`);
   } else {
-    document.querySelector(`.container`).classList.add(`wrong`);
-    setInterval(() => {
+    setTimeout(() => {
       document.querySelector(`.container`).classList.remove(`wrong`);
     }, 500);
+    document.querySelector(`.container`).classList.add(`wrong`);
     timeLeft -= penalty;
   }
   questionNum++;
